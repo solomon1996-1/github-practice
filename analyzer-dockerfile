@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM Python:3.12
+FROM python:3.12
 
 # Rtrieve the new key directly from Nginx and adding it to your system's list of trusted keys
 # This is to prevent GPG signing key expiration when updating nginx
