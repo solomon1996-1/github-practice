@@ -34,5 +34,5 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker buildx build -f Dockerfile -t $ECR_REGISTRY/my-web-server:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/my-web-server:$IMAGE_TAG
+        docker buildx build -f Dockerfile -t $ECR_REGISTRY/AWS Project.dockerfile:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/AWS Project.dockerfile:$IMAGE_TAG
