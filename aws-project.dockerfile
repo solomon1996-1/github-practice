@@ -13,8 +13,8 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 RUN apt-get update && apt-get install -y awslogs aws-xray-daemon
 
 # Set the log options
-ENV AWS_LOGS_GROUP= Project-1-LG
-ENV AWS_LOGS_STREAM= P1-Log-Stream
+ENV AWS_LOGS_GROUP=Project-1-LG
+ENV AWS_LOGS_STREAM=P1-Log-Stream
 ENV AWS_REGION=us-east-1
 
 # Set the log driver to awslogs
