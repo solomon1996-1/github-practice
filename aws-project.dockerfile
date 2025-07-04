@@ -1,4 +1,4 @@
-name: Docker Image CI
+FROM python:3.12
 
 on:
   push:
