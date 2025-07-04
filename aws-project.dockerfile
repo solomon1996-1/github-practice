@@ -10,7 +10,7 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 #Send container logs to AWS Cloudwatch
 
 # Install CloudWatch Agent
-RUN sudo apt-get update && sudo apt-get upgrade -y
+RUN  apt-get update &&  apt-get upgrade -y
 
 # Set the log options
 ENV AWS_LOGS_GROUP=Project-1-LG
