@@ -27,5 +27,5 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -f Dockerfile -t $ECR_REGISTRY/AWS Project.dockerfile:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/AWS Project.dockerfile:$IMAGE_TAG
+        docker build -f Dockerfile -t $ECR_REGISTRY/AWS_Project.dockerfile:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/AWS_Project.dockerfile:$IMAGE_TAG
