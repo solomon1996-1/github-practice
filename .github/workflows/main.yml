@@ -29,7 +29,8 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: project-1
-        IMAGE_TAG: ${{ github.sha }}
+        COMMIT_SHA: ${{ github.sha }}
       run: |
         docker build -t aws-project.dockerfile -t $ECR_REGISTRY/aws-project.dockerfile:$IMAGE_TAG .
         docker push $ECR_REGISTRY/aws-project.dockerfile:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$COMMIT_SHA
