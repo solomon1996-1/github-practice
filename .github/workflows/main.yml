@@ -27,10 +27,7 @@ jobs:
       
     - name: Build, tag, and push image to Amazon ECR
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: project-1
-        COMMIT_SHA: ${{ github.sha }}
+ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        docker build -t aws-project.dockerfile -t $ECR_REGISTRY/aws-project.dockerfile:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/aws-project.dockerfile:$IMAGE_TAG
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$COMMIT_SHA
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f aws-project.dockerfile .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
