@@ -36,7 +36,7 @@ jobs:
       # Step 5: Build the Docker image
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY }}:latest .
+          docker build -f aws-project.dockerfile -t ${{ secrets.ECR_REPOSITORY }}:latest .
 
       # Step 6: Tag the Docker image with the ECR URI
       - name: Tag Docker image
