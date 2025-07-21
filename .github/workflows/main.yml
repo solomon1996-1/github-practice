@@ -20,9 +20,8 @@ jobs:
 
       # Step 3: Log in to Amazon ECR using the GitHub Action
       - name: Log in to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          region: us-east-2  # Directly specify the region here
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
       # Step 4: Build the Docker image
       - name: Build Docker image
