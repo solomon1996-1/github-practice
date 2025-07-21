@@ -22,7 +22,7 @@ jobs:
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          region: ${{ secrets.AWS_REGION }}  # Explicitly passing region to the ECR login
+          region: us-east-2  # Directly specify the region here
 
       # Step 4: Build the Docker image
       - name: Build Docker image
@@ -32,9 +32,9 @@ jobs:
       # Step 5: Tag the Docker image with the ECR URI
       - name: Tag Docker image
         run: |
-          docker tag ${{ secrets.ECR_REPOSITORY }}:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
+          docker tag ${{ secrets.ECR_REPOSITORY }}:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest  # Hard-code region here
 
       # Step 6: Push the Docker image to ECR
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest  # Hard-code region here
