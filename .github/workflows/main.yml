@@ -23,7 +23,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
         with:
-          aws-region: us-east-2
+         aws-region: us-east-2
 
       # Step 4: Build the Docker image
       - name: Build Docker image
