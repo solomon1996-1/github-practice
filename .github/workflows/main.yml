@@ -14,30 +14,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Set up Docker Buildx
+      # Step 2: Configure AWS Credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2  # Specify the region here
+          
+
+      # Step 3: Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Configure AWS Credentials for Non-Prod
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-2
-
-      # Step 3: Log in to Amazon ECR using the GitHub Action
+      # Step 4: Log in to Amazon ECR
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
-    
-      # Step 4: Build the Docker image
+        with:
+          region: us-east-2  # Ensure region is set for ECR login
+
+      # Step 5: Build the Docker image
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.ECR_REPOSITORY }}:latest .
 
-      # Step 5: Tag the Docker image with the ECR URI
+      # Step 6: Tag the Docker image with the ECR URI
       - name: Tag Docker image
         run: |
-          docker tag ${{ secrets.ECR_REPOSITORY }}:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest  # Hard-code region here
+          docker tag ${{ secrets.ECR_REPOSITORY }}:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
 
-      # Step 6: Push the Docker image to ECR
+      # Step 7: Push the Docker image to ECR
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest  # Hard-code region here
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
