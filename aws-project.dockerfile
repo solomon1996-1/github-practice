@@ -45,14 +45,12 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 #Send container logs to AWS Cloudwatch
 
 # Install CloudWatch Agent (official agent, recommended)
+# Install dependencies for CloudWatch Agent
 RUN apt-get update && apt-get install -y \
     curl \
-    # Test network access to the CloudFront URL
-    && curl -I https://d1vvhvl2y92vvt.cloudfront.net/awslogs-agent-setup.py \
     && curl -O https://d1vvhvl2y92vvt.cloudfront.net/awslogs-agent-setup.py \
     && python awslogs-agent-setup.py --region us-east-2 --non-interactive \
     && rm -f awslogs-agent-setup.py
-
 
 
 # Set the log options
