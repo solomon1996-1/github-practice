@@ -45,7 +45,6 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 #Send container logs to AWS Cloudwatch
 
 # Install CloudWatch Agent (official agent, recommended)
-[general]
 state_file = /var/awslogs/state/agent-state
 
 # Set the log driver to awslogs
