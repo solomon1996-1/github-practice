@@ -45,21 +45,17 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 #Send container logs to AWS Cloudwatch
 
 # Install CloudWatch Agent (official agent, recommended)
-# Install dependencies for CloudWatch Agent
-RUN apt-get update && apt-get install -y \
-    curl \
-    && curl -O https://d1vvhvl2y92vvt.cloudfront.net/awslogs-agent-setup.py \
-    && python awslogs-agent-setup.py --region us-east-2 --non-interactive \
-    && rm -f awslogs-agent-setup.py
-
-
-# Set the log options
-ENV AWS_LOGS_GROUP=Project-log-group
-ENV AWS_LOGS_STREAM=Project-log-stream
-ENV AWS_REGION=us-east-2
+[general]
+state_file = /var/awslogs/state/agent-state
 
 # Set the log driver to awslogs
 ENV LOG_DRIVER=awslogs
+
+[/var/log/syslog]
+file = /var/log/syslog
+log_group_name = Project-log-group
+log_stream_name = Project-log-stream
+datetime_format = %b %d %H:%M:%S
 
 # Configure CloudTrail 
 ENV AWS_CLOUDTRAIL_REGION=us-east-2
