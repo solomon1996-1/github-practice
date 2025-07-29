@@ -44,13 +44,6 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 
 #Send container logs to AWS Cloudwatch
 
-# Configure CloudTrail 
-ENV AWS_CLOUDTRAIL_REGION=us-east-2
-ENV AWS_CLOUDTRAIL_BUCKET=project-bucket-1996
-
-# Create a CloudTrail trail
-RUN aws cloudtrail create-trail --name my-trail --state-enabled --project-bucket-1996
-
 #Install Datadog agent
 
 
