@@ -36,14 +36,14 @@ jobs:
       # Step 5: Build the Docker image
       - name: Build Docker image
         run: |
-          docker build -f python-dockerfile-engine-dispatcher -t ${{ secrets.ECR_REPOSITORY }}:new .
+          docker build -f python-dockerfile-engine-dispatcher -t ${{ secrets.ECR_REPOSITORY }}:newone .
 
       # Step 6: Tag the Docker image with the ECR URI
       - name: Tag Docker image
         run: |
-          docker tag ${{ secrets.ECR_REPOSITORY }}:new ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:new
+          docker tag ${{ secrets.ECR_REPOSITORY }}:newone ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:newone
 
       # Step 7: Push the Docker image to ECR
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:new
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:newone
